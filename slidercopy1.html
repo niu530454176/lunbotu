@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>slider</title>
+	<style type="text/css">
+		body, p, img, dl, dt, dd, ul, ol, h1, h2, h3, h4, h5, h6 {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			position: relative;
+			font: 12px/1.5 Simsun, Arial;
+			color: #666;
+			text-align: left;
+			background: #000;
+		}
+
+		ul, ol {
+			list-style: none;
+		}
+
+		img {
+			border: 0 none;
+		}
+
+		input, select {
+			vertical-align: middle;
+		}
+
+		table {
+			border-collapse: collapse;
+		}
+
+		s, em, i {
+			font-style: normal;
+			text-decoration: none;
+		}
+
+		a {
+			outline: none;
+			text-decoration: none;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+
+		.clear {
+			*zoom: 1;
+		}
+
+		.clear:after {
+			clear: both;
+			content: ".";
+			display: block;
+			height: 0;
+			overflow: hidden;
+			visibility: hidden;
+			zoom: 1;
+		}
+
+		.slideBox {
+			position: relative;
+			width: 600px;
+			height: 300px;
+			overflow: hidden;
+		}
+
+		.slideBox ul.items {
+			width: 8000px;
+			height: 300px;
+		}
+
+		.slideBox ul.items li {
+			/*float: left;*/
+			width: 600px;
+			height: 300px;
+		}
+
+		.arrows .arrow-left {
+			background: url(images/sprite-arrow-prev.png) no-repeat;
+			width: 22px;
+			height: 32px;
+			position: absolute;
+			left: 10px;
+			top: 110px;
+		}
+
+		.arrows .arrow-right {
+			background: url(images/sprite-arrow-next.png) no-repeat;
+			width: 22px;
+			height: 32px;
+			position: absolute;
+			right: 10px;
+			top: 110px;
+		}
+	</style>
+</head>
+<body>
+
+<div id="slide1" class="slideBox">
+	<ul class="items J-items">
+		<li>
+			<a href="#" target="_blank">
+				<img src="http://demo.sc.chinaz.com/Files/DownLoad/webjs1/201304/jiaoben828/img/1.jpg">
+			</a>
+		</li>
+		<li>
+			<a href="#" target="_blank">
+				<img src="http://demo.sc.chinaz.com/Files/DownLoad/webjs1/201304/jiaoben828/img/2.jpg">
+			</a>
+		</li>
+		<li>
+			<a href="#" target="_blank">
+				<img src="http://demo.sc.chinaz.com/Files/DownLoad/webjs1/201304/jiaoben828/img/3.jpg">
+			</a>
+		</li>
+		<li>
+			<a href="#" target="_blank">
+				<img src="http://demo.sc.chinaz.com/Files/DownLoad/webjs1/201304/jiaoben828/img/4.jpg">
+			</a>
+		</li>
+		<li>
+			<a href="#" target="_blank">
+				<img src="http://demo.sc.chinaz.com/Files/DownLoad/webjs1/201304/jiaoben828/img/5.jpg">
+			</a>
+		</li>
+	</ul>
+	<div class="arrows">
+		<a class="arrow-left J-arrow-left" href="javascript:;" target="_self"></a>
+		<a class="arrow-right J-arrow-right" href="javascript:;" target="_self"></a>
+	</div>
+</div>
+<div id="slide2" class="slideBox">
+	<ul class="items J-items">
+		<li>
+			<a href="#" target="_blank">
+				<img src="http://demo.sc.chinaz.com/Files/DownLoad/webjs1/201304/jiaoben828/img/1.jpg">
+			</a>
+		</li>
+		<li>
+			<a href="#" target="_blank">
+				<img src="http://demo.sc.chinaz.com/Files/DownLoad/webjs1/201304/jiaoben828/img/2.jpg">
+			</a>
+		</li>
+		<li>
+			<a href="#" target="_blank">
+				<img src="http://demo.sc.chinaz.com/Files/DownLoad/webjs1/201304/jiaoben828/img/3.jpg">
+			</a>
+		</li>
+		<li>
+			<a href="#" target="_blank">
+				<img src="http://demo.sc.chinaz.com/Files/DownLoad/webjs1/201304/jiaoben828/img/4.jpg">
+			</a>
+		</li>
+		<li>
+			<a href="#" target="_blank">
+				<img src="http://demo.sc.chinaz.com/Files/DownLoad/webjs1/201304/jiaoben828/img/5.jpg">
+			</a>
+		</li>
+	</ul>
+	<div class="arrows">
+		<a class="arrow-left J-arrow-left" href="javascript:;" target="_self"></a>
+		<a class="arrow-right J-arrow-right" href="javascript:;" target="_self"></a>
+	</div>
+</div>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	/*    $(function () {
+
+	 var $slide = $('#slide'),
+	 $arrowLeft = $slide.find('.J-arrow-left'),
+	 $arrowRight = $slide.find('.J-arrow-right'),
+	 $items = $slide.find('.J-items'),
+	 $li = $slide.find('li'),
+	 index = 0;//当前展示的图片下标
+
+	 $arrowLeft.click(function () {
+	 index--;
+	 if (index < 0) {
+	 index = $li.length-1;
+	 }
+	 $items.animate({
+	 marginLeft: -$li.width() * index
+	 }, 2000)
+	 });
+
+	 $arrowRight.click(function () {
+	 index++;
+	 if (index > $li.length-1) {
+	 index = 0;
+	 }
+	 $items.animate({
+	 marginLeft: -$li.width() * index
+	 })
+	 })
+	 })*/
+
+	//封装左移轮播图
+	function Slide(opts) {
+		this.init(opts);
+	}
+
+	Slide.prototype = {
+		$slide: null,
+		$arrowLeft: null,
+		$arrowRight: null,
+		$items: null,
+		$li: null,
+		timeoutId: null,
+		index: 0,
+		speed: 0,
+		delay: 0,
+		init: function (opts) {
+			var _this = this;
+			_this.$slide = opts.$target;
+			_this.$arrowLeft = _this.$slide.find('.J-arrow-left');
+			_this.$arrowRight = _this.$slide.find('.J-arrow-right');
+			_this.$items = _this.$slide.find('.J-items');
+			_this.$li = _this.$items.find('li');
+
+			_this.index = 0;
+			_this.delay = opts.delay;
+			_this.speed = opts.speed;
+			_this.autoPlay = opts.autoPlay;
+
+			_this.addEvents();
+			_this.autoMove();
+			_this.aPlay();
+		},
+		addEvents: function () {
+			var _this = this;
+			_this.$arrowLeft.click(function () {
+				_this.move('left');
+			});
+
+			_this.$arrowRight.click(function () {
+				_this.move('right');
+			});
+		},
+		move: function (direction) {//direction方向: left right
+			var _this = this;
+			if (direction == 'left') {
+				_this.index--;
+			} else {
+				_this.index++;
+			}
+			if (_this.index < 0) {
+				_this.index = _this.$li.length - 1;
+			}
+			if (_this.index > _this.$li.length - 1) {
+				_this.index = 0;
+			}
+			if (!_this.autoPlay) {
+				clearTimeout(_this.timeoutId);
+				_this.$items.animate({
+					'marginTop': _this.$li.height() * -_this.index
+				}, _this.speed);
+			} else {
+				clearTimeout(_this.timeoutId);
+				_this.$items.animate({
+					'marginTop': _this.$li.height() * -_this.index
+				}, _this.speed, function () {
+					_this.autoMove();
+				});
+			}
+		},
+		autoMove: function () {
+			var _this = this;
+			_this.timeoutId = setTimeout(function () {//setinterval 和setTimeOut  两种运行方式
+				_this.move('right');
+			}, _this.delay);
+		},
+		aPlay: function () {
+			var _this = this;
+			if (!_this.autoPlay) {
+				clearTimeout(_this.timeoutId);
+			} else {
+				clearTimeout(_this.timeoutId);
+				_this.move()
+			}
+		}
+	};
+
+	var slide1 = new Slide({
+		$target: $('#slide1'),
+		speed: 2000,
+		delay: 5000,
+		autoPlay: false
+	});
+
+	var slide2 = new Slide({
+		$target: $('#slide2'),
+		speed: 1000,
+		delay: 5000,
+		autoPlay: true
+	})
+</script>
+</body>
+</html>
